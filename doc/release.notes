@@ -1,0 +1,292 @@
+[v0r22p0]
+* JB
+NEW: makeModisTree script
+
+[v0r21p1]
+* JB
+NEW:  
+FIX: 
+CHANGE: Alignment correction not linear but as sqrt
+
+[v0r21p0]
+* JB
+NEW:  Calculate and plot Optical Depths for Total, Rayleigh, Aeorosols, Model
+      and Model aerosols
+FIX: delete maps in Analyser destructor
+CHANGE: update hess db name in db interface
+        Angstroem exponent from OD and not from alpha
+
+[v0r20p1]
+* JB
+NEW:  add test python for LidarProcessor
+      Angstroem exponent TGraph and Canvas
+CHANGE: 
+
+[v0r20p0]
+* JB
+NEW:  add all scripts
+CHANGE: 
+
+[v0r19p3]
+* JB
+NEW:  LidarFile has a converter to txt file
+      use sequence number (for when a run has multiple Lidar shoots)
+CHANGE: add SNRation to config.cfg
+        Scan AC up to 20%
+        Add R0,AC to legend
+ 
+ [v0r19p2]
+* JB
+FIX: ConfigHandler: ConfigTGraph name
+   
+[v0r19p1]
+* JB
+NEW: ConfigHandler: store config to file
+     Analyser: save real config to ConfigHandler object
+
+[v0r19p0]
+* JB
+NEW: ConfigHandler: add OptimizeAC_Hmin
+     Analyser: add fParamOptimizeAC_Hmin, PureRayleighInversion, doOptimizeAC
+               to optimize mis-alignment correction factor
+
+[v0r18p0]
+* JB
+NEW:  add Bkg Profile in Plotter and fit the drift between 20-25 km
+      Analyser: add mis-alignment correction factor in Fernald84Inversione
+                getters and setters for new parameters below
+      ConfigHandler : new parameters and getters
+                      OptimizeR0, OptimizeAC, AlignCorr_355, AlignCorr_532                      
+CHANGE: Analyser: move code to doOptimizeR0
+
+[v0r17p0]
+* JB
+NEW:  LidarFile has a converter to txt file
+      use sequence number (for when a run has multiple Lidar shoots)
+CHANGE: add SNRatio to config.cfg
+
+[v0r16p0]
+*JB
+NEW: S/N ratio threshold is a configuration parameter
+
+[v0r15p0]
+*JB
+NEW: Compute and plot BinnedPowerDev and DevRatio
+     Add PrepareData step in Analyzer
+CHANGE:         
+BUGFIX: Correct Klett and Fernald integral for costheta
+
+[v0r14p1]
+*JB
+NEW:
+CHANGE: Update documentation
+        AtmoPlotter has a verbose switch
+BUGFIX:
+
+[v0r14p0]
+*JB
+NEW: add doc/aeronet_procedure.txt
+CHANGE: Analyser add hasFiltered()
+BUGFIX: radioSonde_Atmo.C now uses LidarTools::AtmoProfile
+        Plotter FillLnFilteredPower only if hasFiltered
+
+[v0r13p0]
+*JB
+NEW: new SavGolFilter class and test_SavGolFilter script
+CHANGE: add SGFilter option in ConfigHandler and Analyser
+        use SavGolFilter in Analyser::ProcessData
+        implement Analyser:FilterPower
+        remove LnPower from Analyser - useful only in Plotter
+        Plotter : add Raw, Filtered and Binned Power graphs
+                  add Filter Canvas
+BUGFIX: remove HSstorage from Makefile 
+
+[v0r12p0]
+*JB 
+NEW: Analyser, new RebinDataLinear method that includes Gliding Average
+               filter
+     ConfigHandler, new parameter LogBins (>0 to use logarithmic binning)
+CHANGE: 
+BUGFIX: test_LidarFileSet.C fixed
+
+[v0r11p0]
+*JB 
+NEW: LidarFileSet, new class to ingest multiple Lidar data files together
+     GlidingAveFilter new class to replace binning
+CHANGE: Makefile and rootlogon.C now use new lib names (rootxxx)
+BUGFIX: 
+
+[v0r10p2]
+*JB 
+NEW: Analyser/ConfigHandler take Lidar Theta into account
+                            add fParamBkgFFactor - background fudge factor                    
+     Script to convert old text files to ROOT files with Sash DataSet
+            and associate run number to dates
+     Plotter use map of pointers to TGraph for Tau and Alpha     
+BUGFIX: Plotter correctly saves Raw data canvas
+
+[v0r10p1]
+*JB 
+BUGFIX: Plotter now saves Opacity and Transmission TGraph
+
+[v0r10p0]
+*JB 
+NEW: add return code to Analyser::InitIndices and use it
+     new AtmoPlotter class to plot atmospheric absorption and optical depth
+     Analyser: create optical depth and tranmission profile for data and model
+     Plotter: restructure MainCanvas, add Low level canvas, plot opacity and
+              transmission profiles
+BUGFIX: fix a few const to make them useful
+
+[v0r9p2]
+*JB 
+NEW: LidarFile read time stamp from text file
+     Analyser implement Aeronet integral
+CHANGE: cosmetics change _r to _m     
+BUFIX: fix typo in test_LidarFile.C
+
+[v0r9p1]
+*JB 
+NEW: LidarFile check for corrupted ROOT file, propagate to LidarProcessor
+     Plotter: add fake graphs to define axis ranges, and run number to object names
+              introduce AtmoGraph as a method and refactor code a bit
+CHANGE: LidarFile: Read out of constructor, refactor Read
+        and propagate to LidarProcessor and tests scripts
+BUGFIX: ConfigHandler, LidarFile, AtmoProfile, AtmoAbsorp close files
+        LidarProcessor del LidarFile to close files via FileHandler destructor
+        
+
+[v0r9p0]
+*JB 15/10/2014
+NEW: Local implementation of Kaskade::AtmosphericAbsorption as AtmoAbsorption
+     Atmospheric profile now really a parameter
+     Atmosphere extinction model filled in Analyser and given to Plotter 
+CHANGE: Remove dependency to Kaskade
+BUGFIX: Removing kaskade dependency makes the python API to work
+        Move initialization out of some constructors
+        Clean up verbose everywhere
+        Analyser: overlap now correctly applied
+
+[v0r8p1]
+*JB
+NEW: Processor add param to apply altitude offset on Plotter
+     Store and pass the run number and the date from LidarFile to Plotter
+BUGFIX: fix defaults in ConfigHandler
+        Plotter save Extra and Summary canvas
+
+[v0r8p0]
+*JB
+NEW: Analyser introduce LidarAltitude,
+     new AtmoProfile class to read atmosphere profiles
+     Plotter add SumamryCanvas and fix markers
+CHANGE: Analyser use meters everywhere
+        Update ConfigHandler accordingly to Analyser
+BUGFIX: Analyser use Rayleigh instead of total atmosphere extinction in Fernald84
+
+[v0r7p1]
+*JB
+NEW: Fernald84 : Add cheat on beta_p<0, add sratio=1.01 (1% of aerosols at R0)
+     Add radio sonde data with simple analysis scripts plotRadioSonde.py and
+     verification of atmosphere model radioSonde_Atmo.C
+     
+CHANGE: 
+BUGFIX: Tau4 now really integrates from 0.8 to 4 km
+        Analyser Fix test on fAlgName
+
+[v0r7p0]
+*JB
+NEW: Implement Fernald 84, probably still bugged
+CHANGE: implement Klett_k variable in Klett inversion
+BUGFIX: 
+
+[v0r6p4]
+*JB
+NEW: 
+CHANGE:
+BUGFIX: fix ClassDef/ClassImp
+
+[v0r6p3]
+*JB
+NEW: Doxygen a few example scripts
+CHANGE:
+BUGFIX:
+
+[v0r6p2]
+*JB
+NEW: Doxygen all files plus minimal mainpage
+CHANGE: 
+BUGFIX:
+
+[v0r6p1]
+*JB
+NEW: Doxygen all classes
+CHANGE: 
+BUGFIX:
+
+[v0r6p0]
+*JB
+NEW: Add Overlap class and test script for the Lidar overlap function
+     OverlapFunction is a parameter of ConfigHandler
+CHANGE: 
+BUGFIX: Remove not implemented method declared in header for Plotter and LidarFile
+
+[v0r5p1]
+*JB
+NEW: Fix destructors everywhere
+     Pass verbose to all constructors
+CHANGE: 
+BUGFIX: Initialize Klett alpha0 using nearest altitude bin to R0
+
+[v0r5p0]
+*JB
+NEW: Plotter - add destructor, get blue and green colors appropriately
+     Plotter - add SaveAs to write graphs to disk, and axis titles to DisplayAll
+     Plotter - protect getters for missing elements in maps 
+     add main wrapper LidarProcessor
+method
+CHANGE: 
+BUGFIX: 
+
+[v0r4p0]
+*JB
+NEW: Analyser can overwrite config parameters directly, add getter for fConfig
+     Analyser add member with a vector of available wave lengths
+     Plotter now handles graphs separately
+CHANGE: 
+BUGFIX: Makefile - fix includes and used libraries for pyROOT
+
+[v0r3p0]
+*JB
+NEW: add Plotter class to plot Lidar data analysis results and test script   
+CHANGE: LidarFile can read text and ROOT files, and also find a run from RunNumber
+BUGFIX:
+
+[v0r2p0]
+*JB
+NEW: add Reset method to ConfigHandler to initialize values
+     ConfigHandler map is now <string,string> to pass AtmosphericAbsortion file name
+     add LidarFile class and test program to test LidarFile and Analyser     
+CHANGE: better use ConfigHandler in Analyser
+BUGFIX: fabs and log10 in Analyser
+
+[v0r1p0]
+*JB
+NEW: add ConfigHandler to read parameters from a text file
+     add Analyser to run the full data analysis that is now done by wavelength
+     start data analysis by a basic data quality check (-5.0 V peak)
+     Klett is initialized with atmospheric transmission from Corsika table
+CHANGE: 
+BUGFIX:
+
+[v0r0p1]
+*JB
+NEW: add RyleighScattering class and plot in readRunQuality
+     add Makefile and minimal doxygen
+CHANGE: 
+BUGFIX:
+
+[v0r0p0]
+*JB
+NEW: first import
+CHANGE: 
+BUGFIX:

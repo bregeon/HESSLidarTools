@@ -1,0 +1,44 @@
+from George Vasileiadis fortran program given by an Argentinian colleague.
+***********************************************
+Aeronet Procedure
+***********************************************
+(A1) INPUTS - SIGNALS ***********************************************
+(A1.1) Read signals
+(A1.2) Subtraction of ZERO measurement
+(A1.3) Suming shots
+(B1) CALCULATIONS - SIGNAL PROCCESSING ******************************
+(B1.1) GLIDING AVERAGE, to change the resolution from 7.5 to 30m,
+       to be consistent with Raman FC corrected signals
+       change resolution of the new profile
+       Derivation of new altitude (in m)
+(B1.2) Subtracting background (FC)
+(B1.3) Rangecorrecting
+(B1.4) Smoothing of noise (no errors), Sav-Gol, with coef for exp law
+    a) FC corrected signals
+    b) range corrected signals
+       ERRORS
+(B1.5) GLIDING AVERAGE, according resolution from input file
+    a) FC corrected signals
+    b) range corrected signals
+B2) CALCULATIONS - ATMOSPHERE **************************************
+    US atmosphere or radiosonde calculations (Pressure, Temperature)
+B2.1) US std
+B2.2) Radiosonde
+B2.3) Rayleigh atmosphere calculations
+B4) CALCULATIONS - KLETT BACKSCATTER *******************************
+B4.1) Backscatter ratio of the background aerosol
+       find subscript for reference heights
+       call Klett subroutine
+(C) WRITE OUTPUTS - ASCII, SIGNALS+ATM.PARAMETERS ********
+(C1) WRITE ASCII, SIGNALS+ATM.PARAMETERS *****************
+(C1.1) write signals to ascii output files
+(C1.2) write atmospheric parameters to ascii output files
+(C2) WRITE OUTPUTS - ASCII+STATISTICS+NETCDF  ************
+     define boundaries which will change only if you ask for NETCDF output
+     asking for netcdf output, and write-convert netcdf
+(C2.1) WRITE NETCDF (if netctrl=Y)  ***********
+       Convert to Netcdf format
+       Re-convert Netcdf to Netdat, so you can see what you are sending
+(C2.2) WRITE 4 STATISTICS (if netctrl=Y)  ****************
+(C2.3) WRITE 4 ORIGIN (check results) (if netctrl=Y/N) ***
+       check results
